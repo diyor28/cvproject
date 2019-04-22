@@ -107,5 +107,7 @@ venv.bak/
 
 /weights/
 /video_samples/
-/supersampl/media/
 /temp/
+/supersampl/media/images/
+/supersampl/media/intermediate/
+/supersampl/media/processed/
