@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block head %}
+	{% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/facedetection/detect_face.css' %}">
+{% endblock %}
+
+{% block body%}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'facedetection:recognize' %}">Detection</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'supersampl:get-image' %}">Super Resolution</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <img id="stream" src="{% url 'facedetection:stream' %}" width="800px">
+    <a href="{% url "facedetection:add-face" %}" class="btn btn-outline-success">Add Face</a>
+
+
+{% endblock %}

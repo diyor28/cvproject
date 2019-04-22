@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block head %}
+	{% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/supersampl/get_image.css' %}">
+{% endblock %}
+
+{% block body%}
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'facedetection:recognize' %}">Detection</a>
+                </li>
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'supersampl:get-image' %}">Super Resolution</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    {% if intermediate %}
+        <div class="container" id="comp">
+
+            <div class="image">
+                <img src="{{ intermediate }}" width="350">
+                <div class="top-left"><h1 id="before">Before</h1></div>
+            </div>
+
+            <div class="image">
+                <img src="{{ processed }}" width="350">
+                <div class="top-left"><h1 id="after">After</h1></div>
+            </div>
+
+            <form class="md-form" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="file-field big-2" id="choose-file">
+                    <div class="btn btn-outline-danger btn-rounded waves-effect btn-lg float-left">
+                        <label for="id_image">
+                        <span>Choose file<i class="fas fa-upload ml-3" aria-hidden="true"></i></span>
+                        </label>
+                        {{ form.image }}
+                    </div>
+                </div>
+
+                <button class="btn btn-outline-primary" id="submit-button">Submit</button>
+            </form>
+
+        </div>
+    {% else %}
+
+        <div class="container" id="comp">
+
+            <div class="image">
+                <img src="{% static 'images/tt23_raw.bmp' %}" width="350">
+                <div class="top-left"><h1 id="before">Before</h1></div>
+            </div>
+
+            <div class="image">
+                <img src="{% static 'images/tt23_processed.bmp' %}" width="350">
+                <div class="top-left"><h1 id="after">After</h1></div>
+            </div>
+
+            {% if error_message %}
+            <div class="alert alert-danger" role="alert">
+              <strong>Oh snap!</strong> {{ error_message }}
+            </div>
+            {% endif %}
+
+            <form class="md-form" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="file-field big-2" id="choose-file">
+                    <div class="btn btn-outline-danger btn-rounded waves-effect btn-lg float-left">
+                        <label for="id_image">
+                        <span>Choose file<i class="fas fa-upload ml-3" aria-hidden="true"></i></span>
+                        </label>
+                        {{ form.image }}
+                    </div>
+                </div>
+
+                <button class="btn btn-outline-primary" id="submit-button">Submit</button>
+            </form>
+
+        </div>
+
+    {% endif %}
+
+{% endblock %}

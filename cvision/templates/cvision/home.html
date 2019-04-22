@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+
+{% block head %}
+	{% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/cvision/home.css' %}">
+{% endblock %}
+
+{% block body%}
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'facedetection:recognize' %}">Detection</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'supersampl:get-image' %}">Super Resolution</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="w3-container">
+
+
+    <header class="w3-row">
+             <div class="w3-col l5 m5">
+                 <div class="w3-padding w3-center " style="margin-top: 170px;">
+                     <h3 class="w3-jumbo">Face Detection</h3>
+                     <p>Face detection in a continuous video stream in real time using neural networks.
+                     In addition, the network is able to estimate the age and gender of the person detected.</p>
+                 </div>
+             </div>
+             <div class="w3-col l7 m7" >
+                 <div class="w3-padding">
+                     <video src="{% static 'videos/demonstration.mp4' %}" autoplay loop width="auto"
+                            style="max-height: 550px">
+                     </video>
+                 </div>
+             </div>
+    </header>
+        <br>
+
+    <main class="w3-row w3-margin-top">
+        <div class="w3-col l4 m6 ">
+            <div class="w3-margin"><img src="{% static 'images/colage.jpg' %}" width="100%">
+            </div>
+        </div>
+        <br>
+        <div class="w3-col l8 m6">
+            <h3>About SR</h3>
+            <hr>
+            <p>Super Resolution is a neural network based algorithm which uses convolution over images to upscale the image
+            with no quality loss and add details to make images sharper and remove digital noise</p></div>
+    </main>
+
+        </section>
+
+
+{% endblock %}
